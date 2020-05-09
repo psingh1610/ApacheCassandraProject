@@ -110,9 +110,12 @@ with open(file, encoding = 'utf8') as f:
         session.execute(query, (line[8], line[3],line[0],line[9],line[5]))
 ## TO-DO: Add in the SELECT statement to verify the data was entered into the table
 try:
-    session.execute("Select * from music_library where sessionId='338' and itemInSession='4'")
+    rows=session.execute("Select * from music_library where sessionId='338' and itemInSession='4'")
 except Exception as e:
     print(e)
+
+for row in rows:
+    print(row.artist,row.song,row.length)
 ## TO-DO: Query 2: Give me only the following: name of artist, song (sorted by itemInSession) and user (first and last name)\
 ## for userid = 10, sessionid = 182
 
@@ -139,9 +142,13 @@ with open(file, encoding = 'utf8') as f:
         ## For e.g., to INSERT artist_name and user first_name, you would change the code below to `line[0], line[1]`
         session.execute(query, (line[0], line[9],line[1],line[4],line[8],line[10],line[3]))
 try:
-    session.execute("Select artist,song,firstName,lastName,itemInSession from music_library where USERID='10' and SESSIONID='182'")
+    rows=session.execute("Select * from music_library1 where USERID='10' and SESSIONID='182'")
 except Exception as e:
     print(e)
+    
+
+for row in rows:
+    print(row[3],row[6],row[4],row[5])
 
 
 ## TO-DO: Query 3: Give me every user name (first and last) in my music app history who listened to the song 'All Hands Against His Own'
@@ -173,9 +180,13 @@ with open(file, encoding = 'utf8') as f:
         ## For e.g., to INSERT artist_name and user first_name, you would change the code below to `line[0], line[1]`
         session.execute(query, (line[1], line[4],line[9]))
 try:
-    session.execute("Select firstName, lastName, song where SONG='All Hands Against His Own'")
+    rows=session.execute("Select * from music_library3 where song='All Hands Against His Own'")
 except Exception as e:
     print(e)
+
+
+for row in rows:
+    print(row[1],row[2])
 
 ## TO-DO: Drop the table before closing out the sessions
 try:
